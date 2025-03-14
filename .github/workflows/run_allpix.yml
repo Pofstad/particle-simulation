@@ -1,4 +1,4 @@
-name: Run Allpix Squared Simulation
+name: Run Allpix Squared
 
 on:
   push:
@@ -8,32 +8,12 @@ on:
 
 jobs:
   run_allpix:
-    runs-on: self-hosted
+    runs-on: self-hosted  # Use your local self-hosted runner
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Set up dependencies
-        run: |
-          sudo apt update && sudo apt install -y build-essential cmake git ninja-build
-          sudo apt install -y libboost-all-dev libeigen3-dev libtbb-dev libxerces-c-dev root-system
-
-      - name: Install Allpix Squared
-        run: |
-          git clone https://gitlab.cern.ch/allpix-squared/allpix-squared.git ~/allpix
-          cd ~/allpix && mkdir build && cd build
-          cmake -DCMAKE_INSTALL_PREFIX=~/allpix/install ..
-          make -j$(nproc) && make install
-          echo "source ~/allpix/install/setup.sh" >> ~/.bashrc
-          source ~/.bashrc
 
       - name: Run Allpix Squared Simulation
         run: |
           chmod +x scripts/run_allpix.sh
           ./scripts/run_allpix.sh
-
-      - name: Upload Simulation Logs
-        uses: actions/upload-artifact@v4
-        with:
-          name: allpix-logs
-          path: logs/run_log.txt
