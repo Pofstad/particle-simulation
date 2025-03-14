@@ -13,3 +13,9 @@ Changes in configs/allpix/allpixsim.conf:
 Run: 7 | Date: Fri Mar 14 10:31:12 AM CET 2025
 Changes in configs/allpix/allpixsim.conf:
 ----------------------------------
+Run: 8 | Date: Fri Mar 14 10:39:00 AM CET 2025
+Changes in configs/allpix/allpixsim.conf:
+----------------------------------
+Run: 9 | Date: Fri Mar 14 10:39:40 AM CET 2025
+Changes in configs/allpix/allpixsim.conf:
+----------------------------------
