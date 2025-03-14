@@ -52,3 +52,4 @@ else
 fi
 
 echo "Simulation completed for Run $RUN_NUMBER. Output saved to $CORRY_FILE."
+g
