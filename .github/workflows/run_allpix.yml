@@ -1,0 +1,33 @@
+name: Run Allpix Squared
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  run_allpix:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Allpix Squared Simulation
+        run: |
+          chmod +x scripts/run_allpix.sh
+          ./scripts/run_allpix.sh
+
+
+      - name: Upload Allpix Output
+        uses: actions/upload-artifact@v3
+        with:
+          name: allpix-output
+          path: output/
+
+      - name: Trigger Corryvreckan Workflow
+        run: |
+          curl -X POST -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/run_corry.yml/dispatches \
+            -d '{"ref":"main"}'
