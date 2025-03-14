@@ -1,0 +1,28 @@
+# Ignore all output files and generated data
+output/
+output/*
+
+# Ignore large files
+*.root
+*.dat
+*.log
+
+# Ignore build files
+build/
+*.o
+*.so
+*.a
+*.exe
+*.dll
+
+# Ignore hidden system files (Mac & Linux)
+.DS_Store
+Thumbs.db
+
+# Ignore GitHub Actions cache
+.github/workflows/*.log
+.github/workflows/*.cache
+
+# Allow config files (force them to be included)
+!configs/allpix/allpixsim.conf
+!configs/**/*.conf
