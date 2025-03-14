@@ -10,3 +10,6 @@ Changes in configs/allpixsim.conf:
 Run: 6 | Date: Fri Mar 14 09:34:09 AM CET 2025
 Changes in configs/allpix/allpixsim.conf:
 ----------------------------------
+Run: 7 | Date: Fri Mar 14 10:31:12 AM CET 2025
+Changes in configs/allpix/allpixsim.conf:
+----------------------------------
