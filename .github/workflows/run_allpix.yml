@@ -8,15 +8,16 @@ on:
 
 jobs:
   run_allpix:
-    runs-on: self-hosted  # Use your local self-hosted runner
+    runs-on: self-hosted  # Keep using the default runner location
     steps:
-      - name: Checkout repository into project directory
+      - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          path: /home/pko/particle-simulation  # Replace with your actual project path
-
 
       - name: Run Allpix Squared Simulation
         run: |
           chmod +x scripts/run_allpix.sh
           ./scripts/run_allpix.sh
+
+      - name: Move Output Files to Project Directory
+        run: |
+          mv ~/Software/actions-runner/_work/particle-simulation/particle-simulation/output/* ~/particle-simulation/output/
