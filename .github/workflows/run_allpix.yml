@@ -8,7 +8,7 @@ on:
 
 jobs:
   run_allpix:
-    runs-on: self-hosted  # Keep using the default runner location
+    runs-on: self-hosted  # Uses your self-hosted runner
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -18,6 +18,12 @@ jobs:
           chmod +x scripts/run_allpix.sh
           ./scripts/run_allpix.sh
 
-      - name: Move Output Files to Project Directory
+      - name: Move Only the Newest Output File
         run: |
-          mv ~/Software/actions-runner/_work/particle-simulation/particle-simulation/output/* ~/particle-simulation/output/
+          mkdir -p ~/particle-simulation/output/
+          latest_file=$(ls -t ~/Software/actions-runner/_work/particle-simulation/particle-simulation/output/ | head -n 1)
+          if [ -n "$latest_file" ]; then
+            mv ~/Software/actions-runner/_work/particle-simulation/particle-simulation/output/$latest_file ~/particle-simulation/output/
+          else
+            echo "No new output files found."
+          fi
