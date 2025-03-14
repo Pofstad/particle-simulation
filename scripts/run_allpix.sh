@@ -1,14 +1,18 @@
 #!/bin/bash
 
+# Get the absolute path to the script's directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+
 # Define files to track run numbers and dates
-RUN_FILE="last_run.txt"
-DATE_FILE="last_date.txt"
+RUN_FILE="$PROJECT_ROOT/last_run.txt"
+DATE_FILE="$PROJECT_ROOT/last_date.txt"
 
 # Get today's date in YYMMDD format
 TODAYS_DATE=$(date +%y%m%d)
 
 # Check if the date has changed; reset run number if it's a new day
-if [ -f "$DATE_FILE" ] && [ "$(cat $DATE_FILE)" == "$TODAYS_DATE" ]; then
+if [ -f "$DATE_FILE" ] && [ "$(cat "$DATE_FILE")" == "$TODAYS_DATE" ]; then
     # Continue incrementing run number
     RUN_NUMBER=$(cat "$RUN_FILE")
     RUN_NUMBER=$((RUN_NUMBER + 1))
@@ -32,7 +36,7 @@ echo "Date: $TODAYS_DATE"
 echo "Corryvreckan Output File: $CORRY_FILE"
 echo "--------------------------------------"
 
-# Run Allpix Squared simulation (directory handling is done in allpixsim.conf)
-allpix -c ../configs/allpix/allpixsim.conf -o CorryvreckanWriter.file_name="$CORRY_FILE"
+# Run Allpix Squared simulation with correct absolute paths
+allpix -c "$PROJECT_ROOT/configs/allpix/allpixsim.conf" -o CorryvreckanWriter.file_name="$CORRY_FILE"
 
 echo "Simulation completed for Run $RUN_NUMBER. Output saved as $CORRY_FILE."
