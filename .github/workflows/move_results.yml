@@ -9,7 +9,7 @@ on:
 
 jobs:
   move_results:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest  # Change from self-hosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
