@@ -10,8 +10,11 @@ jobs:
   run_allpix:
     runs-on: self-hosted  # Use your local self-hosted runner
     steps:
-      - name: Checkout repository
+      - name: Checkout repository into project directory
         uses: actions/checkout@v4
+        with:
+          path: /home/pko/particle-simulation  # Replace with your actual project path
+
 
       - name: Run Allpix Squared Simulation
         run: |
