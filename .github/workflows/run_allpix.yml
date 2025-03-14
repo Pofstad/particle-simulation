@@ -33,7 +33,7 @@ jobs:
           ./scripts/run_allpix.sh
 
       - name: Upload Simulation Logs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: allpix-logs
           path: logs/run_log.txt
